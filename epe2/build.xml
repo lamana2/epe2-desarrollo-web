@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="GestionTareas" default="build" basedir=".">
+    <description>Builds, tests, and runs the project GestionTareas.</description>
+
+    <!-- Define properties -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="libs.dir" value="libs"/>
+
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${dist.dir}"/>
+    
+    <!-- Import default build script -->
+    <import file="nbproject/build-impl.xml"/>
+
+    <!-- Clean target -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <!-- Compile target -->
+    <target name="compile" depends="clean">
+        <mkdir dir="${build.dir}/classes"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}/classes"/>
+    </target>
+
+    <!-- JAR target -->
+    <target name="jar" depends="compile">
+        <jar destfile="${dist.dir}/GestionTareas.jar" basedir="${build.dir}/classes">
+            <manifest>
+                <attribute name="Main-Class" value="com.ejemplo.Main"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- Javadoc target -->
+    <target name="javadoc" depends="compile">
+        <mkdir dir="${dist.dir}/javadoc"/>
+        <javadoc srcdir="${src.dir}" destdir="${dist.dir}/javadoc"/>
+    </target>
+
+    <!-- Test target -->
+    <target name="test" depends="compile">
+        <junit printsummary="true">
+            <classpath>
+                <pathelement path="${build.dir}/classes"/>
+                <pathelement path="${libs.dir}"/>
+            </classpath>
+            <batchtest fork="yes" todir="${build.dir}/test-reports">
+                <fileset dir="${src.dir}">
+                    <include name="**/*Test.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <!-- Run target -->
+    <target name="run" depends="build">
+        <java classname="com.ejemplo.Main" fork="true">
+            <classpath>
+                <pathelement path="${dist.dir}/GestionTareas.jar"/>
+            </classpath>
+        </java>
+    </target>
+
+    <!-- Build target -->
+    <target name="build" depends="clean, compile, jar">
+        <!-- Additional actions after build -->
+    </target>
+</project>
