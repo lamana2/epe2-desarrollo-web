@@ -1,4 +1,4 @@
-# epe2-desarrollo-web
+
 # epe2-desarrollo-web
 
 Este repositorio contiene el código fuente para una aplicación de gestión de tareas desarrollada como parte de un proyecto para el Instituto Profesional IP Chile. La aplicación permite a los usuarios crear, asignar, actualizar y completar tareas, así como generar informes sobre el progreso del proyecto. 
